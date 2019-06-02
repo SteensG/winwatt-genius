@@ -31,6 +31,12 @@ class Styles {
       fontWeight: FontWeight.w300,
       color: Colors.white);
 
+  static final TextStyle h3 = TextStyle(
+      fontFamily: _fontNameDefault,
+      fontSize: _textSizeH3,
+      fontWeight: FontWeight.w300,
+      color: Colors.white);
+
   static Color _hexToColor(String code) {
     return Color(int.parse(code.substring(0, 6), radix: 16) + 0xFF000000);
   }
