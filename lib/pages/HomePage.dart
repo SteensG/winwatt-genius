@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:winwatt_genius_01/pages/GeniusPage.dart';
 import 'package:winwatt_genius_01/pages/LeadPage.dart';
+import 'package:winwatt_genius_01/pages/LeadPageNew.dart';
 import 'package:winwatt_genius_01/pages/SimulationPage.dart';
 
 class HomePage extends StatefulWidget {
@@ -14,7 +15,7 @@ class _HomePageState extends State<HomePage> {
   final _pageOptions = [
     GeniusPage(),
     SimulationPage(),
-    LeadPage(),
+    LeadPageNew(),
   ];
 
   @override

@@ -3,6 +3,7 @@ import 'package:winwatt_genius_01/pages/SearchPage.dart';
 import 'package:winwatt_genius_01/shapes/CustomShapeClipper.dart';
 import 'package:winwatt_genius_01/shapes/NavDrawer.dart';
 import 'package:winwatt_genius_01/main.dart';
+import 'package:winwatt_genius_01/styles/styles.dart';
 
 List<String> locations = ['Belgium', 'Luxemburg'];
 
@@ -60,7 +61,7 @@ class _GeniusPageTopPartState extends State<GeniusPageTopPart> {
                 gradient: LinearGradient(
                     begin: FractionalOffset.topCenter,
                     end: FractionalOffset.bottomCenter,
-                    colors: [firstColor, secondColor])),
+                    colors: [Styles.firstColor, Styles.secondColor])),
             child: Column(children: <Widget>[
               SizedBox(height: 10.0),
               Padding(
@@ -222,7 +223,7 @@ class _ChoiceChipState extends State<ChoiceChip> {
   }
 }
 
-const viewAllStyle = TextStyle(fontSize: 14.0, color: firstColor);
+const viewAllStyle = TextStyle(fontSize: 14.0, color: Styles.firstColor);
 
 var GeniusPageBottomPart = Column(
   children: <Widget>[
@@ -296,8 +297,8 @@ class CategoryCard extends StatelessWidget {
               child: Container(
                 decoration: BoxDecoration(
                     gradient: LinearGradient(colors: [
-                  firstColor.withOpacity(0.8),
-                  secondColor.withOpacity(0.8)
+                  Styles.firstColor.withOpacity(0.8),
+                  Styles.secondColor.withOpacity(0.8)
                 ])),
               ),
             ),

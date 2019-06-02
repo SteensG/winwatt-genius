@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:winwatt_genius_01/pages/HomePage.dart';
-import 'package:winwatt_genius_01/pages/LoginPage.dart';
 import 'package:winwatt_genius_01/pages/SplashPage.dart';
+import 'package:winwatt_genius_01/styles/styles.dart';
 
 void main() => runApp(MyApp());
 
-const Color firstColor = Color(0xFFffa400);
-const Color secondColor = Color(0xFFEC5FA8);
-const TextStyle dropDownLabelStyle = TextStyle(color: Colors.white, fontSize: 16.0);
-const TextStyle dropDownMenuItemStyle = TextStyle(color: Colors.black87, fontSize: 14.0);
+
+const TextStyle dropDownLabelStyle =
+    TextStyle(color: Colors.white, fontSize: 16.0);
+const TextStyle dropDownMenuItemStyle =
+    TextStyle(color: Colors.black87, fontSize: 14.0);
 
 class MyApp extends StatefulWidget {
   @override
@@ -16,7 +16,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-
   static Map<int, Color> color = {
     50: Color.fromRGBO(136, 14, 79, .1),
     100: Color.fromRGBO(136, 14, 79, .2),
@@ -38,12 +37,11 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       title: 'WinWatt Genius App Title',
       theme: new ThemeData(
-          primarySwatch: colorCustom,
-          primaryTextTheme: TextTheme(title: TextStyle(color: Colors.white)),
-
+        fontFamily: 'Muli',
+        primarySwatch: colorCustom,
+        primaryTextTheme: TextTheme(title: Styles.h1),
       ),
-      home:SplashPage(),
-
+      home: SplashPage(),
     );
   }
 }

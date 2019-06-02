@@ -1,9 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:winwatt_genius_01/main.dart';
-import 'package:winwatt_genius_01/pages/HomePage.dart';
 import 'package:winwatt_genius_01/pages/LoginPage.dart';
+import 'package:winwatt_genius_01/styles/styles.dart';
 
 class SplashPage extends StatefulWidget {
   @override
@@ -34,7 +33,7 @@ class _SplashPageState extends State<SplashPage> {
       children: <Widget>[
         Container(
           decoration: BoxDecoration(
-              gradient: LinearGradient(colors: [firstColor, secondColor])),
+              gradient: LinearGradient(colors: [Styles.firstColor, Styles.secondColor])),
         ),
         Column(
           mainAxisAlignment: MainAxisAlignment.start,

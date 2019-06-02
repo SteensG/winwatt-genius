@@ -2,7 +2,9 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:winwatt_genius_01/shapes/CustomShapeClipper.dart';
 import 'package:winwatt_genius_01/shapes/NavDrawer.dart';
+import 'package:winwatt_genius_01/styles/styles.dart';
 
 //https://androidkt.com/http-post-request-in-flutter/
 
@@ -148,16 +150,17 @@ class LeadPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("Simulation"),
+          title: Text("New Lead"),
           iconTheme: new IconThemeData(color: Colors.white),
           elevation: 0.0,
         ),
         drawer: NavDrawer(),
         body: SingleChildScrollView(
           child: new Container(
-            margin: const EdgeInsets.only(left: 8.0, right: 8.0),
+            padding: EdgeInsets.symmetric(horizontal: 50.0),
             child: new Column(
               children: <Widget>[
+                LeadPageTopPart(),
                 new TextFormField(
                   controller: tks_ev_Controller,
                   decoration: const InputDecoration(
@@ -310,5 +313,37 @@ class LeadPage extends StatelessWidget {
             ),
           ),
         ));
+  }
+}
+
+class LeadPageTopPart extends StatelessWidget {
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: <Widget>[
+        ClipPath(
+          clipper: CustomShapeClipper(),
+          child: Container(
+            decoration: BoxDecoration(
+                gradient: LinearGradient(
+                    begin: FractionalOffset.topCenter,
+                    end: FractionalOffset.bottomCenter,
+                    colors: [Styles.firstColor, Styles.secondColor])),
+            height: 150.0,
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 70.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              SizedBox(height: 30.0),
+              Text("Fill in the credentials for a new lead.", style: Styles.h2, textAlign: TextAlign.center,)],
+          ),
+        )
+      ],
+    );
   }
 }

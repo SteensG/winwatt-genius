@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:winwatt_genius_01/main.dart';
 import 'package:winwatt_genius_01/pages/HomePage.dart';
 import 'package:winwatt_genius_01/shapes/CustomShapeClipper.dart';
+import 'package:winwatt_genius_01/styles/styles.dart';
 
 class LoginPage extends StatefulWidget {
   static String tag = 'login-page';
@@ -81,7 +81,7 @@ class _LoginPageState extends State<LoginPage> {
                         gradient: LinearGradient(
                             begin: FractionalOffset.topCenter,
                             end: FractionalOffset.bottomCenter,
-                            colors: [firstColor, secondColor])),
+                            colors: [Styles.firstColor, Styles.secondColor])),
                     height: 160.0,
                   ),
                 ),
