@@ -4,9 +4,10 @@ import 'package:winwatt_genius_01/shapes/CustomShapeClipper.dart';
 import 'package:winwatt_genius_01/shapes/NavDrawer.dart';
 import 'package:winwatt_genius_01/main.dart';
 import 'package:winwatt_genius_01/styles/styles.dart';
-import 'package:winwatt_genius_01/pages/WebViewContainer.dart';
 
 List<String> locations = ['Belgium', 'Luxemburg'];
+
+
 
 final _searchFieldController = TextEditingController();
 
@@ -23,13 +24,15 @@ class _GeniusPageState extends State<GeniusPage> {
         title: Text("WinWatt Genius"),
         iconTheme: new IconThemeData(color: Colors.white),
         elevation: 0.0,
+
       ),
       drawer: NavDrawer(),
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
             GeniusPageTopPart(),
-            GeniusPageBottomPart(),
+            GeniusPageBottomPart,
+            GeniusPageBottomPart,
           ],
         ),
       ),
@@ -160,8 +163,7 @@ class _GeniusPageTopPartState extends State<GeniusPageTopPart> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
                   InkWell(
-                    child: ChoiceChip(
-                        Icons.text_fields, "Keyword", isOptionSelected),
+                    child: ChoiceChip(Icons.text_fields, "Keyword", isOptionSelected),
                     onTap: () {
                       setState(() {
                         isOptionSelected = true;
@@ -170,7 +172,8 @@ class _GeniusPageTopPartState extends State<GeniusPageTopPart> {
                   ),
                   SizedBox(width: 20.0),
                   InkWell(
-                    child: ChoiceChip(Icons.label, "Label", !isOptionSelected),
+                    child: ChoiceChip(
+                        Icons.label, "Label", !isOptionSelected),
                     onTap: () {
                       setState(() {
                         isOptionSelected = false;
@@ -222,10 +225,7 @@ class _ChoiceChipState extends State<ChoiceChip> {
 
 const viewAllStyle = TextStyle(fontSize: 14.0, color: Styles.firstColor);
 
-class GeniusPageBottomPart extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Column(
+var GeniusPageBottomPart = Column(
   children: <Widget>[
     Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
@@ -235,7 +235,7 @@ class GeniusPageBottomPart extends StatelessWidget {
         children: <Widget>[
           Text("Categories to discover", style: dropDownMenuItemStyle),
           Spacer(),
-          GestureDetector(onTap: () => _handleURLButtonPress(context, 'https://app.box.com/s/idosinmx5hrnzel2wavah0ei3defjqv0'),child: Text("VIEW ALL(12)", style: viewAllStyle)),
+          Text("VIEW ALL(12)", style: viewAllStyle),
         ],
       ),
     ),
@@ -248,145 +248,100 @@ class GeniusPageBottomPart extends StatelessWidget {
     )
   ],
 );
-  }
-
-  void _handleURLButtonPress(BuildContext context, String url) {
-    Navigator.push(context,
-        MaterialPageRoute(builder: (context) => WebViewContainer(url)));
-  }
-
-}
-
 
 List<CategoryCard> categoryCards = [
-  CategoryCard(
-      "assets/images/category/products.jpg",
-      "Products",
-      "lorem1",
-      "10 %",
-      "lorem3",
-      "lorem4",
-      "https://app.box.com/s/dr7tv2l534bz1m5o07gw3quhfouj0w6g"),
-  CategoryCard(
-      "assets/images/category/salestools.jpg",
-      "Salestools",
-      "lorem 1",
-      "30 %",
-      "lorem3",
-      "lorem4",
-      "https://app.box.com/s/1pnd4mkgfhfxd60gxvo7pbz2mtk6afqu"),
-  CategoryCard(
-      "assets/images/category/best-practices.jpg",
-      "Best Practices",
-      "lorem 1",
-      "40 %",
-      "lorem3",
-      "lorem4",
-      "https://app.box.com/s/2t4hmpp5ku7mk788hpoyb2z4z05c3iph"),
-  CategoryCard(
-      "assets/images/category/references.jpg",
-      "References",
-      "lorem 1",
-      "50 %",
-      "lorem3",
-      "lorem4",
-      "https://app.box.com/s/1jolony3pjnplwqbh6wbzbe6vfdflli4"),
-  CategoryCard(
-      "assets/images/category/legal.jpg",
-      "Company",
-      "lorem 1",
-      "50 %",
-      "lorem3",
-      "lorem4",
-      "https://app.box.com/s/qkymzuopjxj0n2j3vcgceiv5pryeycue"),
+  CategoryCard("assets/images/category/products.jpg", "Products", "lorem1", "10 %",
+      "lorem3", "lorem4"),
+  CategoryCard("assets/images/category/services.jpg", "Services", "lorem1", "20 %",
+      "lorem3", "lorem4"),
+  CategoryCard("assets/images/category/salestools.jpg", "Salestools", "lorem 1",
+      "30 %", "lorem3", "lorem4"),
+  CategoryCard("assets/images/category/best-practices.jpg", "Best Practices", "lorem 1",
+      "40 %", "lorem3", "lorem4"),
+  CategoryCard("assets/images/category/references.jpg", "References", "lorem 1",
+      "50 %", "lorem3", "lorem4"),
+  CategoryCard("assets/images/category/legal.jpg", "Legal", "lorem 1",
+      "50 %", "lorem3", "lorem4"),
+  CategoryCard("assets/images/category/roof.jpg", "Extra", "lorem 1",
+      "50 %", "lorem3", "lorem4"),
+  //CategoryCard("images/category/bestpractices.jpg", "Best Practices", "lorem1", "lorem2", "lorem3", "lorem4"),
+  //CategoryCard("images/category/references.jpg", "References", "lorem1", "lorem2", "lorem3", "lorem4"),
+  //CategoryCard("images/category/legal.jpg", "Legal", "lorem1", "lorem2", "lorem3", "lorem4"),
+  //CategoryCard("images/category/roof.jpg", "Extra", "lorem1", "lorem2", "lorem3", "lorem4"),
 ];
 
 class CategoryCard extends StatelessWidget {
-  final String imagePath,
-      category,
-      monthYear,
-      discount,
-      oldPrice,
-      newPrice,
-      url;
+  final String imagePath, category, monthYear, discount, oldPrice, newPrice;
 
   const CategoryCard(this.imagePath, this.category, this.monthYear,
-      this.discount, this.oldPrice, this.newPrice, this.url);
+      this.discount, this.oldPrice, this.newPrice);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: GestureDetector(
-        onTap: () => _handleURLButtonPress(context, url),
-        child: ClipRRect(
-          borderRadius: BorderRadius.all(Radius.circular(10.0)),
-          child: Stack(
-            children: <Widget>[
-              Container(
-                height: 210.0,
-                width: 160.0,
-                child: Image.asset(imagePath, fit: BoxFit.cover),
+      child: ClipRRect(
+        borderRadius: BorderRadius.all(Radius.circular(10.0)),
+        child: Stack(
+          children: <Widget>[
+            Container(
+              height: 210.0,
+              width: 160.0,
+              child: Image.asset(imagePath, fit: BoxFit.cover),
+            ),
+            Positioned(
+              left: 0.0,
+              bottom: 0.0,
+              width: 160.0,
+              height: 60,
+              child: Container(
+                decoration: BoxDecoration(
+                    gradient: LinearGradient(colors: [
+                  Styles.firstColor.withOpacity(0.8),
+                  Styles.secondColor.withOpacity(0.8)
+                ])),
               ),
-              Positioned(
-                left: 0.0,
-                bottom: 0.0,
-                width: 160.0,
-                height: 60,
-                child: Container(
-                  decoration: BoxDecoration(
-                      gradient: LinearGradient(colors: [
-                    Styles.firstColor.withOpacity(0.8),
-                    Styles.secondColor.withOpacity(0.8)
-                  ])),
-                ),
+            ),
+            Positioned(
+              left: 10.0,
+              bottom: 10.0,
+              right: 10.0,
+              child: Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(category,
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                              fontSize: 18.0)),
+                      Text(monthYear,
+                          style: TextStyle(
+                              fontWeight: FontWeight.normal,
+                              color: Colors.white,
+                              fontSize: 14.0)),
+                    ],
+                  ),
+                  /*Container(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 6.0, vertical: 2.0),
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          shape: BoxShape.rectangle,
+                          borderRadius: BorderRadius.circular(10.0)),
+                      child: Text(
+                        "$discount",
+                        style: TextStyle(fontSize: 14.0, color: Colors.black),
+                      )),*/
+                ],
               ),
-              Positioned(
-                left: 10.0,
-                bottom: 10.0,
-                right: 10.0,
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(category,
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                                fontSize: 18.0)),
-                        Text(monthYear,
-                            style: TextStyle(
-                                fontWeight: FontWeight.normal,
-                                color: Colors.white,
-                                fontSize: 14.0)),
-                      ],
-                    ),
-                    /*Container(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 6.0, vertical: 2.0),
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            shape: BoxShape.rectangle,
-                            borderRadius: BorderRadius.circular(10.0)),
-                        child: Text(
-                          "$discount",
-                          style: TextStyle(fontSize: 14.0, color: Colors.black),
-                        )),*/
-                  ],
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
-  }
-
-  void _handleURLButtonPress(BuildContext context, String url) {
-    Navigator.push(context,
-        MaterialPageRoute(builder: (context) => WebViewContainer(url)));
   }
 }
