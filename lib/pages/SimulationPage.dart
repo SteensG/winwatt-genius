@@ -234,7 +234,7 @@ class _SimulationPageState extends State<SimulationPage> {
     List<Widget> formWidget = new List();
 
     formWidget.add(new DropdownButton(
-       style: Styles.p,
+      style: Styles.p,
       hint: new Text('Select location'),
       items: locationList,
       value: _selectedLocation,
