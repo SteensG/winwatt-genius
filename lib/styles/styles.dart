@@ -8,7 +8,7 @@ class Styles {
   static const _textSizeH2 = 20.0;
   static const _textSizeH3 = 16.0;
   static const _textSizeParagraph = 14.0;
-  static const _textSizeSmall = 14.0;
+  static const _textSizeSmall = 10.0;
 
   static final String _fontNameDefault = 'Muli';
 
@@ -36,6 +36,16 @@ class Styles {
       fontSize: _textSizeH3,
       fontWeight: FontWeight.w300,
       color: Colors.white);
+
+  static final TextStyle p = TextStyle(
+      fontFamily: _fontNameDefault,
+      fontSize: _textSizeParagraph,
+      color: _textColorText);
+
+  static final TextStyle small = TextStyle(
+      fontFamily: _fontNameDefault,
+      fontSize: _textSizeSmall,
+      color: _textColorText);
 
   static Color _hexToColor(String code) {
     return Color(int.parse(code.substring(0, 6), radix: 16) + 0xFF000000);

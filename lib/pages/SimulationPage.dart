@@ -96,63 +96,123 @@ class _SimulationPageState extends State<SimulationPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 SimulationPageTopPart(),
-                TextFormField(
-                  controller: controllerPanels,
-                  keyboardType: TextInputType.number,
-                  decoration: InputDecoration(
-                      hintText: "Howpany panels can you place?"),
-                  validator: (value) {
-                    if (value.isEmpty) return "Please enter a number";
-                  },
-                ),
-                Text('Select your inclination'),
-                Slider(
-                  value: _selectedInclination.toDouble(),
-                  min: 0.0,
-                  max: 90.0,
-                  divisions: 18,
-                  activeColor: Colors.red,
-                  inactiveColor: Colors.black,
-                  label: 'Set a value',
-                  onChanged: (double newValue) {
-                    setState(() {
-                      _selectedInclination = newValue.round();
-                    });
-                  },
-                ),
-                Text(
-                  'Value: ${(_selectedInclination).round()}',
-                ),
-                Text('Select your azimut'),
-                Slider(
-                  value: _selectedAzimut.toDouble(),
-                  min: -90.0,
-                  max: 90.0,
-                  divisions: 36,
-                  activeColor: Colors.red,
-                  inactiveColor: Colors.black,
-                  label: 'Set a value',
-                  onChanged: (double newValue) {
-                    setState(() {
-                      _selectedAzimut = newValue.round();
-                    });
-                  },
-                ),
-                Text(
-                  'Value: ${(_selectedAzimut).round()}',
-                ),
-                Text('Select your location'),
-                Container(
-                  height: 50,
-                  child: ListView(
-                    children: getLocationFormWidget(),
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 20.0, vertical: 8.0),
+                  child: Column(
+                    children: <Widget>[
+                      Row(
+                        children: <Widget>[
+                          Text('Howmany solar panels?'),
+                        ],
+                      ),
+                      TextFormField(
+                        controller: controllerPanels,
+                        keyboardType: TextInputType.number,
+                        decoration: InputDecoration(hintText: "Amount"),
+                        validator: (value) {
+                          if (value.isEmpty) return "Please enter a number";
+                        },
+                      ),
+                    ],
                   ),
                 ),
-                Text('Select your watt peak'),
-                Container(
-                  height: 50,
-                  child: ListView(
-                    children: getWattPeakFormWidget(),
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 20.0, vertical: 8.0),
+                  child: Column(
+                    children: <Widget>[
+                      Row(
+                        children: <Widget>[
+                          Text('Select your inclination'),
+                        ],
+                      ),
+                      Slider(
+                        value: _selectedInclination.toDouble(),
+                        min: 0.0,
+                        max: 90.0,
+                        divisions: 18,
+                        activeColor: Styles.firstColor,
+                        inactiveColor: Styles.secondColor,
+                        label: 'Set a value',
+                        onChanged: (double newValue) {
+                          setState(() {
+                            _selectedInclination = newValue.round();
+                          });
+                        },
+                      ),
+                      Text(
+                        'Value: ${(_selectedInclination).round()}',
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 20.0, vertical: 8.0),
+                  child: Column(
+                    children: <Widget>[
+                      Row(
+                        children: <Widget>[
+                          Text('Select your azimut'),
+                        ],
+                      ),
+                      Slider(
+                        value: _selectedAzimut.toDouble(),
+                        min: -90.0,
+                        max: 90.0,
+                        divisions: 36,
+                        activeColor: Styles.firstColor,
+                        inactiveColor: Styles.secondColor,
+                        label: 'Set a value',
+                        onChanged: (double newValue) {
+                          setState(() {
+                            _selectedAzimut = newValue.round();
+                          });
+                        },
+                      ),
+                      Text(
+                        'Value: ${(_selectedAzimut).round()}',
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 20.0, vertical: 8.0),
+                  child: Column(
+                    children: <Widget>[
+                      Row(
+                        children: <Widget>[
+                          Text('Select your location'),
+                        ],
+                      ),
+                      Container(
+                        height: 50,
+                        child: ListView(
+                          children: getLocationFormWidget(),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 20.0, vertical: 8.0),
+                  child: Column(
+                    children: <Widget>[
+                      Row(
+                        children: <Widget>[
+                          Text('Select your watt peak'),
+                        ],
+                      ),
+                      Container(
+                        height: 50,
+                        child: ListView(
+                          children: getWattPeakFormWidget(),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
                 Text(textToShowMaxPower, style: TextStyle(fontSize: 12.0)),
@@ -174,6 +234,7 @@ class _SimulationPageState extends State<SimulationPage> {
     List<Widget> formWidget = new List();
 
     formWidget.add(new DropdownButton(
+       style: Styles.p,
       hint: new Text('Select location'),
       items: locationList,
       value: _selectedLocation,
@@ -192,6 +253,7 @@ class _SimulationPageState extends State<SimulationPage> {
     List<Widget> formWidget = new List();
 
     formWidget.add(new DropdownButton(
+      style: Styles.p,
       hint: new Text('Select watt peak'),
       items: wattPeakList,
       value: _selectedWattPeak,
