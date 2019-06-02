@@ -157,6 +157,28 @@ class _LeadPageNewState extends State<LeadPageNew> {
   bool _tks_pv_value = false;
   bool _tks_bat_value = false;
   bool _tks_ev_value = false;
+  bool _commercial_info_value = false;
+
+  List<String> _tks_client_type_values = <String>[
+    'Owner of a house',
+    'Owner of an appartment',
+    'Renter'
+  ];
+  String _tks_client_type_value = 'Owner of a house';
+
+  List<String> _tks_timeline_values = <String>[
+    'ASAP',
+    'Within 3 months',
+    'Within 6 months',
+    'Within the year'
+  ];
+  String _tks_timeline_value = 'ASAP';
+
+  List<String> _tks_new_install_values = <String>[
+    'Yes',
+    'No',
+  ];
+  String _tks_new_install_value = 'Yes';
 
   @override
   Widget build(BuildContext context) {
@@ -175,36 +197,6 @@ class _LeadPageNewState extends State<LeadPageNew> {
                     child: new Column(
                       children: <Widget>[
                         LeadPageTopPart(),
-                        new SwitchListTile(
-                          value: _tks_pv_value,
-                          onChanged: (bool value) {
-                            setState(() {
-                              _tks_pv_value = value;
-                            });
-                          },
-                          title: new Text('Interested in solar panels'),
-                          activeColor: Styles.secondColor,
-                        ),
-                        new SwitchListTile(
-                          value: _tks_bat_value,
-                          onChanged: (bool value) {
-                            setState(() {
-                              _tks_bat_value = value;
-                            });
-                          },
-                          title: new Text('Interested in batteries'),
-                          activeColor: Styles.secondColor,
-                        ),
-                        new SwitchListTile(
-                          value: _tks_ev_value,
-                          onChanged: (bool value) {
-                            setState(() {
-                              _tks_ev_value = value;
-                            });
-                          },
-                          title: new Text('Interested in charging stations'),
-                          activeColor: Styles.secondColor,
-                        ),
                         Padding(
                           padding: const EdgeInsets.symmetric(
                               horizontal: 20.0, vertical: 8.0),
@@ -263,7 +255,7 @@ class _LeadPageNewState extends State<LeadPageNew> {
                           child: new TextFormField(
                             controller: lane_Controller,
                             decoration: const InputDecoration(
-                              icon: const Icon(Icons.person),
+                              icon: const Icon(Icons.place),
                               hintText: 'Enter your lane',
                               labelText: 'Lane',
                             ),
@@ -279,7 +271,7 @@ class _LeadPageNewState extends State<LeadPageNew> {
                           child: new TextFormField(
                             controller: code_Controller,
                             decoration: const InputDecoration(
-                              icon: const Icon(Icons.person),
+                              icon: const Icon(Icons.place),
                               hintText: 'Enter your code',
                               labelText: 'Zipcode',
                             ),
@@ -296,7 +288,7 @@ class _LeadPageNewState extends State<LeadPageNew> {
                             keyboardType: TextInputType.text,
                             controller: city_Controller,
                             decoration: const InputDecoration(
-                              icon: const Icon(Icons.person),
+                              icon: const Icon(Icons.place),
                               hintText: 'Enter your city',
                               labelText: 'City',
                             ),
@@ -313,7 +305,7 @@ class _LeadPageNewState extends State<LeadPageNew> {
                             keyboardType: TextInputType.text,
                             controller: country_Controller,
                             decoration: const InputDecoration(
-                              icon: const Icon(Icons.person),
+                              icon: const Icon(Icons.place),
                               hintText: 'Enter your country',
                               labelText: 'Country',
                             ),
@@ -326,37 +318,177 @@ class _LeadPageNewState extends State<LeadPageNew> {
                         Padding(
                           padding: const EdgeInsets.symmetric(
                               horizontal: 20.0, vertical: 8.0),
-                          child: new TextFormField(
-                            controller: tks_client_type_Controller,
-                            decoration: const InputDecoration(
-                              icon: const Icon(Icons.person),
-                              hintText: 'Enter your tks_client_type',
-                              labelText: 'tks_client_type',
-                            ),
+                          child: new SwitchListTile(
+                            value: _tks_pv_value,
+                            onChanged: (bool value) {
+                              setState(() {
+                                _tks_pv_value = value;
+                              });
+                            },
+                            title: new Text('Interested in solar panels'),
+                            activeColor: Styles.secondColor,
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 20.0, vertical: 8.0),
+                          child: new SwitchListTile(
+                            value: _tks_bat_value,
+                            onChanged: (bool value) {
+                              setState(() {
+                                _tks_bat_value = value;
+                              });
+                            },
+                            title: new Text('Interested in batteries'),
+                            activeColor: Styles.secondColor,
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 20.0, vertical: 8.0),
+                          child: new SwitchListTile(
+                            value: _tks_ev_value,
+                            onChanged: (bool value) {
+                              setState(() {
+                                _tks_ev_value = value;
+                              });
+                            },
+                            title: new Text('Interested in charging stations'),
+                            activeColor: Styles.secondColor,
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 20.0, vertical: 8.0),
+                          child: new FormField(
+                            builder: (FormFieldState state) {
+                              return InputDecorator(
+                                decoration: InputDecoration(
+                                  icon: const Icon(Icons.person),
+                                  labelText: 'Client type',
+                                ),
+                                isEmpty: _tks_client_type_value == '',
+                                child: new DropdownButtonHideUnderline(
+                                  child: new DropdownButton(
+                                    value: _tks_client_type_value,
+                                    isDense: true,
+                                    onChanged: (String newValue) {
+                                      setState(() {
+                                        _tks_client_type_value = newValue;
+                                        state.didChange(newValue);
+                                      });
+                                    },
+                                    items: _tks_client_type_values
+                                        .map((String value) {
+                                      return new DropdownMenuItem(
+                                        value: value,
+                                        child: new Text(value),
+                                      );
+                                    }).toList(),
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 20.0, vertical: 8.0),
+                          child: new FormField(
+                            builder: (FormFieldState state) {
+                              return InputDecorator(
+                                decoration: InputDecoration(
+                                  icon: const Icon(Icons.access_time),
+                                  labelText: 'Timeline',
+                                ),
+                                isEmpty: _tks_timeline_value == '',
+                                child: new DropdownButtonHideUnderline(
+                                  child: new DropdownButton(
+                                    value: _tks_timeline_value,
+                                    isDense: true,
+                                    onChanged: (String newValue) {
+                                      setState(() {
+                                        _tks_timeline_value = newValue;
+                                        state.didChange(newValue);
+                                      });
+                                    },
+                                    items:
+                                        _tks_timeline_values.map((String value) {
+                                      return new DropdownMenuItem(
+                                        value: value,
+                                        child: new Text(value),
+                                      );
+                                    }).toList(),
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 20.0, vertical: 8.0),
+                          child: new FormField(
+                            builder: (FormFieldState state) {
+                              return InputDecorator(
+                                decoration: InputDecoration(
+                                  icon: const Icon(Icons.autorenew),
+                                  labelText: 'New install',
+                                ),
+                                isEmpty: _tks_new_install_value == '',
+                                child: new DropdownButtonHideUnderline(
+                                  child: new DropdownButton(
+                                    value: _tks_new_install_value,
+                                    isDense: true,
+                                    onChanged: (String newValue) {
+                                      setState(() {
+                                        _tks_new_install_value = newValue;
+                                        state.didChange(newValue);
+                                      });
+                                    },
+                                    items: _tks_new_install_values
+                                        .map((String value) {
+                                      return new DropdownMenuItem(
+                                        value: value,
+                                        child: new Text(value),
+                                      );
+                                    }).toList(),
+                                  ),
+                                ),
+                              );
+                            },
                           ),
                         ),
                         Padding(
                           padding: const EdgeInsets.symmetric(
                               horizontal: 20.0, vertical: 8.0),
                           child: new TextFormField(
-                            controller: tks_timeline_Controller,
+                            keyboardType: TextInputType.multiline,
+                            maxLines: 5,
+                            controller: description_Controller,
                             decoration: const InputDecoration(
-                              icon: const Icon(Icons.person),
-                              hintText: 'Enter your tks_timeline',
-                              labelText: 'tks_timeline',
+                              icon: const Icon(Icons.description),
+                              hintText: 'Enter a description',
+                              labelText: 'Description',
                             ),
+                            validator: (value) {
+                              if (value.isEmpty)
+                                return 'This field is required';
+                            },
                           ),
                         ),
                         Padding(
                           padding: const EdgeInsets.symmetric(
                               horizontal: 20.0, vertical: 8.0),
-                          child: new TextFormField(
-                            controller: tks_new_install_Controller,
-                            decoration: const InputDecoration(
-                              icon: const Icon(Icons.person),
-                              hintText: 'Enter your tks_new_install',
-                              labelText: 'tks_new_install',
-                            ),
+                          child: new SwitchListTile(
+                            value: _commercial_info_value,
+                            onChanged: (bool value) {
+                              setState(() {
+                                _commercial_info_value = value;
+                              });
+                            },
+                            title: new Text('Commercial information'),
+                            activeColor: Styles.secondColor,
                           ),
                         ),
                         Container(
@@ -382,11 +514,9 @@ class _LeadPageNewState extends State<LeadPageNew> {
                                   code: code_Controller.text,
                                   city: city_Controller.text,
                                   country: country_Controller.text,
-                                  tks_client_type:
-                                      tks_client_type_Controller.text,
-                                  tks_timeline: tks_timeline_Controller.text,
-                                  tks_new_install:
-                                      tks_new_install_Controller.text,
+                                  tks_client_type: _tks_client_type_value,
+                                  tks_timeline: _tks_timeline_value,
+                                  tks_new_install: _tks_new_install_value,
                                   description: description_Controller.text,
                                   tks_lang: tks_lang_Controller.text,
                                   campaignid: campaignid_Controller.text,
