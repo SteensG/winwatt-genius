@@ -4,9 +4,32 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:winwatt_genius_01/shapes/CustomShapeClipper.dart';
 import 'package:winwatt_genius_01/shapes/NavDrawer.dart';
-import 'package:winwatt_genius_01/styles/styles.dart';
+import 'package:winwatt_genius_01/styles/Styles.dart';
 
+//Bottom navigatie
+//Love, G. Adding a Bottom Navigation Bar in Flutter
+//https://www.youtube.com/watch?v=n_FRmFm9Tyw
+//Geraadpleegd in April, 2019
+
+//Gradient shape
+//Android Master. Flutter Complete Course - Build iOS and Android Apps with Google's Flutter & Dart - Flutter Tutorial
+//https://youtu.be/qUiq02ineLs?list=LLnpWmJ20aP77YdV04aXqZDA&t=4
+//Geraadpleegd in April, 2019
+
+//HTTP POST request naar CRM
+//Brijesh. HTTP post request in Flutter.
 //https://androidkt.com/http-post-request-in-flutter/
+//Geraadpleegd in Mei, 2019
+
+//FORM aanmaken
+//CodingWithJoe. Building Forms with Flutter
+//https://codingwithjoe.com/building-forms-with-flutter/
+//Geraadpleegd in Mei, 2019
+
+//FORM valideren
+//Manning, N. https://fluttercrashcourse.com/lessons/realistic-forms-part1
+//https://fluttercrashcourse.com/lessons/realistic-forms-part1
+//Geraadpleegd in Mei, 2019
 
 class Lead {
   final String tks_pv;
@@ -101,14 +124,24 @@ Future<Lead> createLead(String url, {Map body}) async {
       throw new Exception("Error while fetching data");
     }
     print("beforesucces");
-    return Lead.fromJson(json.decode(response.body));
+    print('body: [${response.body}]');
+    //return Lead.fromJson(json.decode(response.body));
   });
 }
 
-class LeadPage extends StatelessWidget {
+//Op deze pagina kan men een nieuwe lead aanmaken.
+//Deze lead wordt gevalideert en dan verstuurd naar de CRM van WinWatt
+class LeadPage extends StatefulWidget {
+  @override
+  _LeadPageState createState() => _LeadPageState();
+}
+
+class _LeadPageState extends State<LeadPage> {
+  final _formKey = GlobalKey<FormState>();
   final Future<Lead> lead;
 
-  LeadPage({Key key, this.lead}) : super(key: key);
+  _LeadPageState({this.lead});
+
   static final CRM_URL =
       'http://winwatt.technokrafts.biz/modules/Webforms/tks_captureLead_lampiris.php';
   TextEditingController tks_pv_Controller =
@@ -146,178 +179,403 @@ class LeadPage extends StatelessWidget {
   TextEditingController campaignid_Controller =
       new TextEditingController(text: "47106");
 
+  bool _tks_pv_value = false;
+  bool _tks_bat_value = false;
+  bool _tks_ev_value = false;
+  bool _commercial_info_value = false;
+
+  List<String> _tks_client_type_values = <String>[
+    'Owner of a house',
+    'Owner of an appartment',
+    'Renter'
+  ];
+  String _tks_client_type_value = 'Owner of a house';
+
+  List<String> _tks_timeline_values = <String>[
+    'ASAP',
+    'Within 3 months',
+    'Within 6 months',
+    'Within the year'
+  ];
+  String _tks_timeline_value = 'ASAP';
+
+  List<String> _tks_new_install_values = <String>[
+    'Yes',
+    'No',
+  ];
+  String _tks_new_install_value = 'Yes';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("New Lead"),
+          title: Text("Lead Form"),
           iconTheme: new IconThemeData(color: Colors.white),
           elevation: 0.0,
         ),
         drawer: NavDrawer(),
-        body: SingleChildScrollView(
-          child: new Container(
-            padding: EdgeInsets.symmetric(horizontal: 50.0),
-            child: new Column(
-              children: <Widget>[
-                LeadPageTopPart(),
-                new TextFormField(
-                  controller: tks_ev_Controller,
-                  decoration: const InputDecoration(
-                    icon: const Icon(Icons.person),
-                    hintText: 'Enter your tks_pv',
-                    labelText: 'tks_pv',
+        body: SafeArea(
+          child: SingleChildScrollView(
+            child: Builder(
+              builder: (context) => Form(
+                    key: _formKey,
+                    child: new Column(
+                      children: <Widget>[
+                        LeadPageTopPart(),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 20.0, vertical: 8.0),
+                          child: new TextFormField(
+                            keyboardType: TextInputType.text,
+                            controller: firstname_Controller,
+                            decoration: const InputDecoration(
+                              icon: const Icon(Icons.person),
+                              hintText: 'Enter your firstname',
+                              labelText: 'Firstname',
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 20.0, vertical: 8.0),
+                          child: new TextFormField(
+                            keyboardType: TextInputType.text,
+                            controller: lastname_Controller,
+                            decoration: const InputDecoration(
+                              icon: const Icon(Icons.person),
+                              hintText: 'Enter your lastname',
+                              labelText: 'Lastname',
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 20.0, vertical: 8.0),
+                          child: new TextFormField(
+                            keyboardType: TextInputType.emailAddress,
+                            controller: email_Controller,
+                            decoration: const InputDecoration(
+                              icon: const Icon(Icons.email),
+                              hintText: 'Enter a email address',
+                              labelText: 'Email',
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 20.0, vertical: 8.0),
+                          child: new TextFormField(
+                            keyboardType: TextInputType.phone,
+                            controller: phone_Controller,
+                            decoration: const InputDecoration(
+                              icon: const Icon(Icons.phone),
+                              hintText: 'Enter a phone number',
+                              labelText: 'Phonenumber',
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 20.0, vertical: 8.0),
+                          child: new TextFormField(
+                            controller: lane_Controller,
+                            decoration: const InputDecoration(
+                              icon: const Icon(Icons.place),
+                              hintText: 'Enter your lane',
+                              labelText: 'Lane',
+                            ),
+                            validator: (value) {
+                              if (value.isEmpty)
+                                return 'This field is required';
+                            },
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 20.0, vertical: 8.0),
+                          child: new TextFormField(
+                            controller: code_Controller,
+                            decoration: const InputDecoration(
+                              icon: const Icon(Icons.place),
+                              hintText: 'Enter your code',
+                              labelText: 'Zipcode',
+                            ),
+                            validator: (value) {
+                              if (value.isEmpty)
+                                return 'This field is required';
+                            },
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 20.0, vertical: 8.0),
+                          child: new TextFormField(
+                            keyboardType: TextInputType.text,
+                            controller: city_Controller,
+                            decoration: const InputDecoration(
+                              icon: const Icon(Icons.place),
+                              hintText: 'Enter your city',
+                              labelText: 'City',
+                            ),
+                            validator: (value) {
+                              if (value.isEmpty)
+                                return 'This field is required';
+                            },
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 20.0, vertical: 8.0),
+                          child: new TextFormField(
+                            keyboardType: TextInputType.text,
+                            controller: country_Controller,
+                            decoration: const InputDecoration(
+                              icon: const Icon(Icons.place),
+                              hintText: 'Enter your country',
+                              labelText: 'Country',
+                            ),
+                            validator: (value) {
+                              if (value.isEmpty)
+                                return 'This field is required';
+                            },
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 20.0, vertical: 8.0),
+                          child: new SwitchListTile(
+                            value: _tks_pv_value,
+                            onChanged: (bool value) {
+                              setState(() {
+                                _tks_pv_value = value;
+                              });
+                            },
+                            title: new Text('Interested in solar panels'),
+                            activeColor: Styles.secondColor,
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 20.0, vertical: 8.0),
+                          child: new SwitchListTile(
+                            value: _tks_bat_value,
+                            onChanged: (bool value) {
+                              setState(() {
+                                _tks_bat_value = value;
+                              });
+                            },
+                            title: new Text('Interested in batteries'),
+                            activeColor: Styles.secondColor,
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 20.0, vertical: 8.0),
+                          child: new SwitchListTile(
+                            value: _tks_ev_value,
+                            onChanged: (bool value) {
+                              setState(() {
+                                _tks_ev_value = value;
+                              });
+                            },
+                            title: new Text('Interested in charging stations'),
+                            activeColor: Styles.secondColor,
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 20.0, vertical: 8.0),
+                          child: new FormField(
+                            builder: (FormFieldState state) {
+                              return InputDecorator(
+                                decoration: InputDecoration(
+                                  icon: const Icon(Icons.person),
+                                  labelText: 'Client type',
+                                ),
+                                isEmpty: _tks_client_type_value == '',
+                                child: new DropdownButtonHideUnderline(
+                                  child: new DropdownButton(
+                                    value: _tks_client_type_value,
+                                    isDense: true,
+                                    onChanged: (String newValue) {
+                                      setState(() {
+                                        _tks_client_type_value = newValue;
+                                        state.didChange(newValue);
+                                      });
+                                    },
+                                    items: _tks_client_type_values
+                                        .map((String value) {
+                                      return new DropdownMenuItem(
+                                        value: value,
+                                        child: new Text(value),
+                                      );
+                                    }).toList(),
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 20.0, vertical: 8.0),
+                          child: new FormField(
+                            builder: (FormFieldState state) {
+                              return InputDecorator(
+                                decoration: InputDecoration(
+                                  icon: const Icon(Icons.access_time),
+                                  labelText: 'Timeline',
+                                ),
+                                isEmpty: _tks_timeline_value == '',
+                                child: new DropdownButtonHideUnderline(
+                                  child: new DropdownButton(
+                                    value: _tks_timeline_value,
+                                    isDense: true,
+                                    onChanged: (String newValue) {
+                                      setState(() {
+                                        _tks_timeline_value = newValue;
+                                        state.didChange(newValue);
+                                      });
+                                    },
+                                    items:
+                                        _tks_timeline_values.map((String value) {
+                                      return new DropdownMenuItem(
+                                        value: value,
+                                        child: new Text(value),
+                                      );
+                                    }).toList(),
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 20.0, vertical: 8.0),
+                          child: new FormField(
+                            builder: (FormFieldState state) {
+                              return InputDecorator(
+                                decoration: InputDecoration(
+                                  icon: const Icon(Icons.autorenew),
+                                  labelText: 'New install',
+                                ),
+                                isEmpty: _tks_new_install_value == '',
+                                child: new DropdownButtonHideUnderline(
+                                  child: new DropdownButton(
+                                    value: _tks_new_install_value,
+                                    isDense: true,
+                                    onChanged: (String newValue) {
+                                      setState(() {
+                                        _tks_new_install_value = newValue;
+                                        state.didChange(newValue);
+                                      });
+                                    },
+                                    items: _tks_new_install_values
+                                        .map((String value) {
+                                      return new DropdownMenuItem(
+                                        value: value,
+                                        child: new Text(value),
+                                      );
+                                    }).toList(),
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 20.0, vertical: 8.0),
+                          child: new TextFormField(
+                            keyboardType: TextInputType.multiline,
+                            maxLines: 5,
+                            controller: description_Controller,
+                            decoration: const InputDecoration(
+                              icon: const Icon(Icons.description),
+                              hintText: 'Enter a description',
+                              labelText: 'Description',
+                            ),
+                            validator: (value) {
+                              if (value.isEmpty)
+                                return 'This field is required';
+                            },
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 20.0, vertical: 8.0),
+                          child: new SwitchListTile(
+                            value: _commercial_info_value,
+                            onChanged: (bool value) {
+                              setState(() {
+                                _commercial_info_value = value;
+                              });
+                            },
+                            title: new Text('Commercial information'),
+                            activeColor: Styles.secondColor,
+                          ),
+                        ),
+                        Container(
+                          padding: EdgeInsets.symmetric(
+                              vertical: 16.0, horizontal: 16.0),
+                          child: new RaisedButton(
+                            color: Styles.firstColor,
+                            onPressed: () async {
+                              final form = _formKey.currentState;
+
+                              if (form.validate()) {
+                                form.save();
+                                _showDialog(context);
+                                Lead newLead = new Lead(
+                                  tks_pv: _tks_pv_value == true ? '1' : '0',
+                                  tks_bat: _tks_bat_value == true ? '1' : '0',
+                                  tks_ev: _tks_ev_value == true ? '1' : '0',
+                                  firstname: firstname_Controller.text,
+                                  lastname: lastname_Controller.text,
+                                  email: email_Controller.text,
+                                  phone: phone_Controller.text,
+                                  lane: lane_Controller.text,
+                                  code: code_Controller.text,
+                                  city: city_Controller.text,
+                                  country: country_Controller.text,
+                                  tks_client_type: _tks_client_type_value,
+                                  tks_timeline: _tks_timeline_value,
+                                  tks_new_install: _tks_new_install_value,
+                                  description: description_Controller.text,
+                                  tks_lang: tks_lang_Controller.text,
+                                  campaignid: campaignid_Controller.text,
+                                );
+                                Lead l = await createLead(CRM_URL,
+                                    body: newLead.toMap());
+                              }
+
+                              //print(l.firstname);
+                            },
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 20.0, vertical: 8.0),
+                              child: Text(
+                                "Create",
+                                style: Styles.h3,
+                              ),
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
                   ),
-                ),
-                new TextFormField(
-                  controller: tks_bat_Controller,
-                  decoration: const InputDecoration(
-                    icon: const Icon(Icons.person),
-                    hintText: 'Enter your tks_bat',
-                    labelText: 'tks_bat',
-                  ),
-                ),
-                new TextFormField(
-                  controller: tks_ev_Controller,
-                  decoration: const InputDecoration(
-                    icon: const Icon(Icons.person),
-                    hintText: 'Enter your tks_ev',
-                    labelText: 'tks_ev',
-                  ),
-                ),
-                new TextFormField(
-                  controller: firstname_Controller,
-                  decoration: const InputDecoration(
-                    icon: const Icon(Icons.person),
-                    hintText: 'Enter your firstname',
-                    labelText: 'Firstname',
-                  ),
-                ),
-                new TextFormField(
-                  controller: lastname_Controller,
-                  decoration: const InputDecoration(
-                    icon: const Icon(Icons.person),
-                    hintText: 'Enter your lastname',
-                    labelText: 'Lastname',
-                  ),
-                ),
-                new TextFormField(
-                  controller: email_Controller,
-                  decoration: const InputDecoration(
-                    icon: const Icon(Icons.email),
-                    hintText: 'Enter a email address',
-                    labelText: 'Email',
-                  ),
-                  keyboardType: TextInputType.emailAddress,
-                ),
-                new TextFormField(
-                  controller: phone_Controller,
-                  decoration: const InputDecoration(
-                    icon: const Icon(Icons.phone),
-                    hintText: 'Enter a phone number',
-                    labelText: 'Phonenumber',
-                  ),
-                  keyboardType: TextInputType.phone,
-                ),
-                new TextFormField(
-                  controller: lane_Controller,
-                  decoration: const InputDecoration(
-                    icon: const Icon(Icons.person),
-                    hintText: 'Enter your lane',
-                    labelText: 'Lane',
-                  ),
-                ),
-                new TextFormField(
-                  controller: code_Controller,
-                  decoration: const InputDecoration(
-                    icon: const Icon(Icons.person),
-                    hintText: 'Enter your code',
-                    labelText: 'Zipcode',
-                  ),
-                ),
-                new TextFormField(
-                  controller: city_Controller,
-                  decoration: const InputDecoration(
-                    icon: const Icon(Icons.person),
-                    hintText: 'Enter your city',
-                    labelText: 'City',
-                  ),
-                ),
-                new TextFormField(
-                  controller: country_Controller,
-                  decoration: const InputDecoration(
-                    icon: const Icon(Icons.person),
-                    hintText: 'Enter your country',
-                    labelText: 'Country',
-                  ),
-                ),
-                new TextFormField(
-                  controller: tks_client_type_Controller,
-                  decoration: const InputDecoration(
-                    icon: const Icon(Icons.person),
-                    hintText: 'Enter your tks_client_type',
-                    labelText: 'tks_client_type',
-                  ),
-                ),
-                new TextFormField(
-                  controller: tks_timeline_Controller,
-                  decoration: const InputDecoration(
-                    icon: const Icon(Icons.person),
-                    hintText: 'Enter your tks_timeline',
-                    labelText: 'tks_timeline',
-                  ),
-                ),
-                new TextFormField(
-                  controller: tks_new_install_Controller,
-                  decoration: const InputDecoration(
-                    icon: const Icon(Icons.person),
-                    hintText: 'Enter your tks_new_install',
-                    labelText: 'tks_new_install',
-                  ),
-                ),
-                new TextFormField(
-                  controller: campaignid_Controller,
-                  decoration: const InputDecoration(
-                    icon: const Icon(Icons.person),
-                    hintText: 'enter campaignid',
-                    labelText: 'campaginid',
-                  ),
-                ),
-                new RaisedButton(
-                  onPressed: () async {
-                    Lead newLead = new Lead(
-                      tks_pv: tks_pv_Controller.text,
-                      tks_bat: tks_bat_Controller.text,
-                      tks_ev: tks_ev_Controller.text,
-                      firstname: firstname_Controller.text,
-                      lastname: lastname_Controller.text,
-                      email: email_Controller.text,
-                      phone: phone_Controller.text,
-                      lane: lane_Controller.text,
-                      code: code_Controller.text,
-                      city: city_Controller.text,
-                      country: country_Controller.text,
-                      tks_client_type: tks_client_type_Controller.text,
-                      tks_timeline: tks_timeline_Controller.text,
-                      tks_new_install: tks_new_install_Controller.text,
-                      description: description_Controller.text,
-                      tks_lang: tks_lang_Controller.text,
-                      campaignid: campaignid_Controller.text,
-                    );
-                    Lead l = await createLead(CRM_URL, body: newLead.toMap());
-                    print(l.firstname);
-                  },
-                  child: const Text("Create"),
-                )
-              ],
             ),
           ),
         ));
   }
+
+  _showDialog(BuildContext context) {
+    Scaffold.of(context).showSnackBar(SnackBar(content: Text('Lead created')));
+  }
 }
 
 class LeadPageTopPart extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -340,7 +598,12 @@ class LeadPageTopPart extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               SizedBox(height: 30.0),
-              Text("Fill in the credentials for a new lead.", style: Styles.h2, textAlign: TextAlign.center,)],
+              Text(
+                "Fill in the credentials for a new lead.",
+                style: Styles.h2,
+                textAlign: TextAlign.center,
+              )
+            ],
           ),
         )
       ],

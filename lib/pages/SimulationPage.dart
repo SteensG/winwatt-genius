@@ -1,8 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:winwatt_genius_01/shapes/CustomShapeClipper.dart';
 import 'package:winwatt_genius_01/shapes/NavDrawer.dart';
-import 'package:winwatt_genius_01/styles/styles.dart';
+import 'package:winwatt_genius_01/styles/Styles.dart';
 
+//Bottom navigatie
+//Love, G. Adding a Bottom Navigation Bar in Flutter
+//https://www.youtube.com/watch?v=n_FRmFm9Tyw
+//Geraadpleegd in April, 2019
+
+//Gradient shape
+//Android Master. Flutter Complete Course - Build iOS and Android Apps with Google's Flutter & Dart - Flutter Tutorial
+//https://youtu.be/qUiq02ineLs?list=LLnpWmJ20aP77YdV04aXqZDA&t=4
+//Geraadpleegd in April, 2019
+
+//FORM aanmaken
+//CodingWithJoe. Building Forms with Flutter
+//https://codingwithjoe.com/building-forms-with-flutter/
+//Geraadpleegd in Mei, 2019
+
+//FORM valideren
+//Manning, N. https://fluttercrashcourse.com/lessons/realistic-forms-part1
+//https://fluttercrashcourse.com/lessons/realistic-forms-part1
+//Geraadpleegd in Mei, 2019
+
+//Op deze pagina kan men een simulatie maken van het aantal kWh de klant kan opbrengen met zijn installatie zonnepanelen.
 class SimulationPage extends StatefulWidget {
   @override
   _SimulationPageState createState() => _SimulationPageState();
@@ -218,9 +239,15 @@ class _SimulationPageState extends State<SimulationPage> {
                 Text(textToShowMaxPower, style: TextStyle(fontSize: 12.0)),
                 Text(textToShowEstimatedPower,
                     style: TextStyle(fontSize: 12.0)),
-                RaisedButton(
-                  onPressed: solarSimulation,
-                  child: Text('Conclusion'),
+                Container(
+                  padding: EdgeInsets.symmetric(
+                              vertical: 0.0, horizontal: 16.0),
+                  child: RaisedButton(
+                    color: Styles.firstColor,
+                    onPressed: solarSimulation,
+                    child: Text('Conclusion',style: Styles.h3,),
+                    
+                  ),
                 )
               ],
             ),

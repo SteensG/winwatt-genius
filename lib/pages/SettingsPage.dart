@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
 
+//Navigation drawer
+//Vanbilsen, B. Flutter SDK Tutorial - Building a Beautiful Sliding Side Menu Using a Drawer
+//https://youtu.be/WqpV_w6lioA?t=1
+//Geraadpleegd in April 2019
+
+//Dit is de settings pagina
 class SettingsPage extends StatefulWidget {
   @override
   _SettingsPageState createState() => _SettingsPageState();

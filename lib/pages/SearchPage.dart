@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:winwatt_genius_01/main.dart';
 import 'package:winwatt_genius_01/shapes/CustomShapeClipper.dart';
-import 'package:winwatt_genius_01/styles/styles.dart';
+import 'package:winwatt_genius_01/styles/Styles.dart';
+
+//Gradient shape
+//Android Master. Flutter Complete Course - Build iOS and Android Apps with Google's Flutter & Dart - Flutter Tutorial
+//https://youtu.be/qUiq02ineLs?list=LLnpWmJ20aP77YdV04aXqZDA&t=4
+//Geraadpleegd in April, 2019
 
 final Color discountBackgroundColor = Color(0xFFFFE08D);
 final Color flightBordercolor = Color(0xFFE6E6E6);
 final Color chipBackgroundColor = Color(0XFFF6F6F6);
 
+//Op deze pagina komt men terecht wanneer men iets zoekt op de genius pagina
 class SearchPage extends StatelessWidget {
 
   final String searchQuery;

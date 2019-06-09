@@ -1,9 +1,15 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:winwatt_genius_01/pages/LoginPage.dart';
-import 'package:winwatt_genius_01/styles/styles.dart';
+import 'package:winwatt_genius_01/styles/Styles.dart';
 
+//Login en splash screen
+//Mtechviral. https://www.youtube.com/watch?v=FNBuo-7zg2Q
+//https://www.youtube.com/watch?v=FNBuo-7zg2Q
+//Geraadpleegd in April 2019
+
+//Deze pagina wordt als eerste geladen.
+//Na 3 seconden krijgt men de loginpagina te zien.
 class SplashPage extends StatefulWidget {
   @override
   _SplashPageState createState() => _SplashPageState();

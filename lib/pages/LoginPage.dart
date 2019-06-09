@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:winwatt_genius_01/pages/HomePage.dart';
 import 'package:winwatt_genius_01/shapes/CustomShapeClipper.dart';
-import 'package:winwatt_genius_01/styles/styles.dart';
+import 'package:winwatt_genius_01/styles/Styles.dart';
 
+//Login en splash screen
+//Mtechviral. https://www.youtube.com/watch?v=FNBuo-7zg2Q
+//https://www.youtube.com/watch?v=FNBuo-7zg2Q
+//Geraadpleegd in April 2019
+
+
+//Op deze pagina kan men inloggen.
 class LoginPage extends StatefulWidget {
   static String tag = 'login-page';
   @override

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+//Hier worden de stijlen gedefineerd die herbruikt worden in de applicatie.
 class Styles {
   static const Color firstColor = Color(0xFFffa400);
   static const Color secondColor = Color(0xFFEC5FA8);

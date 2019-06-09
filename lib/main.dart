@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:winwatt_genius_01/pages/SplashPage.dart';
 import 'package:winwatt_genius_01/styles/styles.dart';
 
+//Dit is de startfunctie van de applicatie.
 void main() => runApp(MyApp());
 
 

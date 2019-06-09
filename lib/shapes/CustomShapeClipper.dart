@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
 
+//Gradient shape
+//Android Master. Flutter Complete Course - Build iOS and Android Apps with Google's Flutter & Dart - Flutter Tutorial
+//https://youtu.be/qUiq02ineLs?list=LLnpWmJ20aP77YdV04aXqZDA&t=4
+//Geraadpleegd in April, 2019
+
+//Hier wordt de vorm bovenaan de genius,lead en simulatie pagina gedefinieerd.
 class CustomShapeClipper extends CustomClipper<Path>{
   @override
   Path getClip(Size size) {

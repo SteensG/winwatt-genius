@@ -2,6 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:winwatt_genius_01/pages/ProfilePage.dart';
 import 'package:winwatt_genius_01/pages/SettingsPage.dart';
 
+//Navigation drawer
+//Vanbilsen, B. Flutter SDK Tutorial - Building a Beautiful Sliding Side Menu Using a Drawer
+//https://youtu.be/WqpV_w6lioA?t=1
+//Geraadpleegd in April 2019
+
+//Hier wordt de navigatie drawer gedefinieerd.
 class NavDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

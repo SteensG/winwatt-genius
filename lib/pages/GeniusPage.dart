@@ -3,12 +3,31 @@ import 'package:winwatt_genius_01/pages/SearchPage.dart';
 import 'package:winwatt_genius_01/shapes/CustomShapeClipper.dart';
 import 'package:winwatt_genius_01/shapes/NavDrawer.dart';
 import 'package:winwatt_genius_01/main.dart';
-import 'package:winwatt_genius_01/styles/styles.dart';
+import 'package:winwatt_genius_01/styles/Styles.dart';
 import 'package:winwatt_genius_01/pages/WebViewContainer.dart';
+
+//Bottom navigatie
+//Love, G. Adding a Bottom Navigation Bar in Flutter
+//https://www.youtube.com/watch?v=n_FRmFm9Tyw
+//Geraadpleegd in April, 2019
+
+//Gradient shape
+//Android Master. Flutter Complete Course - Build iOS and Android Apps with Google's Flutter & Dart - Flutter Tutorial
+//https://youtu.be/qUiq02ineLs?list=LLnpWmJ20aP77YdV04aXqZDA&t=4
+//Geraadpleegd in April, 2019
+
+//Webview implementatie
+//Manning, N. Flutter webviews
+//https://fluttercrashcourse.com/lessons/flutter-webviews
+//Geraadpleegd in Mei, 2019
 
 List<String> locations = ['Belgium', 'Luxemburg'];
 
 final _searchFieldController = TextEditingController();
+
+//Op deze pagina komt men als eerste terecht.
+//Men ziet hier een zoekveld en de verschillende services die WinWatt aanbied.
+//Door op een afbeelding onderaan te klikken, komt men met een WebView terecht op de informatie
 
 class GeniusPage extends StatefulWidget {
   @override
@@ -235,7 +254,7 @@ class GeniusPageBottomPart extends StatelessWidget {
         children: <Widget>[
           Text("Categories to discover", style: dropDownMenuItemStyle),
           Spacer(),
-          GestureDetector(onTap: () => _handleURLButtonPress(context, 'https://app.box.com/s/idosinmx5hrnzel2wavah0ei3defjqv0'),child: Text("VIEW ALL(12)", style: viewAllStyle)),
+          GestureDetector(onTap: () => _handleURLButtonPress(context, 'https://app.box.com/s/idosinmx5hrnzel2wavah0ei3defjqv0'),child: Text("VIEW ALL(5)", style: viewAllStyle)),
         ],
       ),
     ),
